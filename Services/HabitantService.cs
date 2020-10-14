@@ -32,7 +32,7 @@ namespace MyApp.Service
             Habitants h = new Habitants();
 
             h.nom = _DemandeALutilisateur.saisieNom("Nom de l'habitant :");
-            h.age = _DemandeALutilisateur.saisieEntier("Quel as tu :");
+            h.age = _DemandeALutilisateur.saisieEntier("Quel age as tu ? :");
 
             return h;
         }

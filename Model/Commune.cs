@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,7 +10,7 @@ namespace MyApp
         public string Nom;
         public int CodePost;
         public int NbHab;
-
+        public Departement Departements { get; set; }
 
     }
 }

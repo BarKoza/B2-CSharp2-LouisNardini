@@ -19,7 +19,7 @@ namespace MyApp.Service
         {
             Departement d = new Departement();
             d.nom = _DemandeALutilisateur.saisieNom("Nom du departement");
-            d.numD = _DemandeALutilisateur.saisieEntier("Numeros de departement");
+            d.numD = _DemandeALutilisateur.saisieEntier("Numero de departement");
             departements.Add(d);
             return d;
         }
@@ -30,13 +30,15 @@ namespace MyApp.Service
             Departement result = null;
             while (result == null)
             {
-                string saisieUtilisateur = _DemandeALutilisateur.saisieNom("Numéro de la salle ?");
+                int saisieUtilisateur = _DemandeALutilisateur.saisieEntier("Numéro du Département");
                 foreach (Departement d in this.departements)
                 {
-                    if (d.nom == saisieUtilisateur)
+                    if (d.numD == saisieUtilisateur)
                     {
                         result = d;
                     }
+
+
                 }
             }
 

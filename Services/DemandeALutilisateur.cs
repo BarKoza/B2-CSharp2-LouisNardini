@@ -17,7 +17,7 @@ namespace MyApp.Service
             {
                 if (!int.TryParse(entier, out valeurconvertie))
                 {
-                    Console.WriteLine("Veuillez saisir un entier correcte");
+                    Console.WriteLine("Veuillez saisir un entier correct");
                     entier = Console.ReadLine();
                 }
                 else if (valeurconvertie < 0)
@@ -54,7 +54,7 @@ namespace MyApp.Service
                 }
                 else if (Nom[0] < 65 || Nom[0] > 90)
                 {
-                    Console.WriteLine("Saisie incorrecte: veuillez commencer le nom de votre commune par une majuscule");
+                    Console.WriteLine("Saisie incorrecte: veuillez commencer le nom de votre commune/département par une majuscule");
                     Nom = Console.ReadLine();
                 }
                 else

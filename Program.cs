@@ -28,7 +28,7 @@ namespace MyApp
                 {
                     Habitants h = _HabitantService.CreateHabitants();
                     listhabitants.Add(h);
-                            
+
                 }
                 else if (choixUtilisateur == "2")
                 {
@@ -72,19 +72,6 @@ namespace MyApp
         }
 
 
-        public static void calculNbtotalHabs(List<Commune> listcommunes)
-        {
-            int Nbtot = 0;
-            foreach (Commune c in listcommunes)
-            {
-                Nbtot = Nbtot + c.NbHab;
-            }
-            var culture = CultureInfo.GetCultureInfo("en-GB");
-            string nb = string.Format(culture, "{0:n0}", Nbtot);
-            nb = nb.Replace(",", ".");
-            string message = "Nombre total d'habitants: " + nb;
-            Console.WriteLine(message);
-        }
     }
 }
 
