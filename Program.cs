@@ -1,37 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using MyApp.Services;
-
+using MyApp.Model;
+using MyApp.Service;
 namespace MyApp
 {
     class Program
     {
         private static DemandeALutilisateur _DemandeALutilisateur = new DemandeALutilisateur();
-        private static CommuneService _communeService = new CommuneService(_DemandeALutilisateur);
-
         static void Main(string[] args)
         {
+            DemandeALutilisateur _DemandeALutilisateur = new DemandeALutilisateur();
+            DepartementService _DepartementService = new DepartementService(_DemandeALutilisateur);
+            CommuneService _CommuneService = new CommuneService(_DemandeALutilisateur, _DepartementService);
+            HabitantService _HabitantService = new HabitantService(_DemandeALutilisateur, _CommuneService);
+
+
+
             List<Commune> listcommune = new List<Commune>();
+            List<Habitants> listhabitants = new List<Habitants>();
 
             while (true)
             {
-                string choix = Menu();
+                string choixUtilisateur = MenuUtilisateur();
 
-                if (choix == "1")
+                if (choixUtilisateur == "1")
                 {
-                    Commune c = _communeService.ajouterCommune();
+                    Habitants h = _HabitantService.CreateHabitants();
+                    listhabitants.Add(h);
+                            
+                }
+                else if (choixUtilisateur == "2")
+                {
+                    _HabitantService.AfficheHabitans(listhabitants);
+                }
+                else if (choixUtilisateur == "3")
+                {
+                    Commune c = _CommuneService.CreerCommune();
                     listcommune.Add(c);
                 }
-                else if (choix == "2")
+                else if (choixUtilisateur == "4")
                 {
-                    _communeService.affiche(listcommune);
+                    _DepartementService.CreeDepartement();
                 }
-                else if (choix == "3")
+                else if (choixUtilisateur == "5")
                 {
-                    _communeService.calculNbtotalHabs(listcommune);
+                    _CommuneService.affiche(listcommune);
                 }
-                else if (choix == "Q" || choix == "q")
+                else if (choixUtilisateur == "Q")
                 {
                     break;
                 }
@@ -42,16 +58,32 @@ namespace MyApp
             }
         }
 
-        public static string Menu()
+        private static string MenuUtilisateur()
         {
-            Console.WriteLine("Bienvenue dans l'application de gestion de communes");
-            Console.WriteLine("Que voulez-vous faire");
-            Console.WriteLine("1.Créer une nouvelle communes");
-            Console.WriteLine("2.Afficher l'ensemble des communes");
-            Console.WriteLine("3.Afficher le nombre total d'habitants");
-            Console.WriteLine("Q.Quitter");
+            Console.WriteLine("Que voulez-vous faire ?");
+            Console.WriteLine("1. Créer un habitant");
+            Console.WriteLine("2. Afficher la liste des habitants");
+            Console.WriteLine("3. Créer une Commune");
+            Console.WriteLine("4. Creer un département");
+            Console.WriteLine("5. Afficher la liste des Communes");
+            Console.WriteLine("Q. Quitter");
             string choix = Console.ReadLine();
             return choix;
+        }
+
+
+        public static void calculNbtotalHabs(List<Commune> listcommunes)
+        {
+            int Nbtot = 0;
+            foreach (Commune c in listcommunes)
+            {
+                Nbtot = Nbtot + c.NbHab;
+            }
+            var culture = CultureInfo.GetCultureInfo("en-GB");
+            string nb = string.Format(culture, "{0:n0}", Nbtot);
+            nb = nb.Replace(",", ".");
+            string message = "Nombre total d'habitants: " + nb;
+            Console.WriteLine(message);
         }
     }
 }

@@ -10,3 +10,4 @@ C:\Users\Louis\Documents\Cours EPSI\Cours B2\C#\Visual Studio\ConsoleAppExam2\Co
 C:\Users\Louis\Documents\Cours EPSI\Cours B2\C#\Visual Studio\ConsoleAppExam2\ConsoleAppExam2\obj\Debug\netcoreapp3.1\ConsoleAppExam2.dll
 C:\Users\Louis\Documents\Cours EPSI\Cours B2\C#\Visual Studio\ConsoleAppExam2\ConsoleAppExam2\obj\Debug\netcoreapp3.1\ConsoleAppExam2.pdb
 C:\Users\Louis\Documents\Cours EPSI\Cours B2\C#\Visual Studio\ConsoleAppExam2\ConsoleAppExam2\obj\Debug\netcoreapp3.1\ConsoleAppExam2.genruntimeconfig.cache
+C:\Users\Louis\Documents\Cours EPSI\Cours B2\C#\Visual Studio\ConsoleAppExam2\ConsoleAppExam2\obj\Debug\netcoreapp3.1\ConsoleAppExam2.csprojAssemblyReference.cache

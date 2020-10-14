@@ -1,52 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Globalization;
+using System.Text;
 
-namespace MyApp.Services
+namespace MyApp.Service
 {
     public class CommuneService
     {
-
+        private List<Commune> Communes = new List<Commune>();
         private DemandeALutilisateur _demandeALutilisateur;
 
-        public CommuneService(DemandeALutilisateur demandealutilisateur)
-        {
-            this._demandeALutilisateur = demandealutilisateur;
-        }
-        public Commune ajouterCommune()
-        {
-            Commune c = new Commune();
-            c.Nom = _demandeALutilisateur.saisieNom("Quel est le nom de votre ville ?");
-            c.CodePost = _demandeALutilisateur.saisieEntier("Quel est de code postal ?");
-            c.NbHab = _demandeALutilisateur.saisieEntier("Combien y a-t-il d'habitants ?");
+        private DepartementService _departementService;
 
-            return c;
+        public CommuneService(DemandeALutilisateur demandeALutilisateur, DepartementService departementService)
+        {
+            this._demandeALutilisateur = demandeALutilisateur;
+            this._departementService = departementService;
         }
 
-        public void calculNbtotalHabs(List<Commune> listcommunes)
+        public Commune CreerCommune()
         {
-            int Nbtot = 0;
-            foreach (Commune c in listcommunes)
-            {
-                Nbtot = Nbtot + c.NbHab;
-            }
-            var culture = CultureInfo.GetCultureInfo("en-GB");
-            string nb = string.Format(culture, "{0:n0}", Nbtot);
-            nb = nb.Replace(",", ".");
-            string message = "Nombre total d'habitants: " + nb + "\n";
-            Console.WriteLine(message);
+            Commune result = new Commune();
+
+            result.Nom = _demandeALutilisateur.saisieNom("Nom de la commune :");
+            result.CodePost = _demandeALutilisateur.saisieEntier(" Code postal :");
+            result.NbHab = _demandeALutilisateur.saisieEntier("nombre d'habitants :");
+
+            Communes.Add(result);
+            return result;
         }
 
-        public void affiche(List<Commune> listcommunes)
+        public void affiche(List<Commune> Listecommunes)
         {
-            Console.WriteLine("Liste des communes créées:");
-            foreach (Commune c in listcommunes)
+            Console.WriteLine("Liste des communes créées: \n");
+            foreach (Commune c in Listecommunes)
             {
                 var culture = CultureInfo.GetCultureInfo("en-GB");
                 string nb = string.Format(culture, "{0:n0}", c.NbHab);
                 nb = nb.Replace(",", ".");
-                string message_p1 = "Nom: " + c.Nom + "\n" + "Code Postal: " + c.CodePost + "\n";
+                string message_p1 = "Nom: " + c.Nom + "\n" + "Code Postal: " + c.CodePost;
                 string message_p2 = "Nombre d'habitants: " + nb + "\n";
                 Console.WriteLine(message_p1);
                 Console.WriteLine(message_p2);
